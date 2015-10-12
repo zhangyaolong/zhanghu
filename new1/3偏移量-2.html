@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+#div1{ width:300px; height:100px; background:red; border:10px green solid; margin:0 0 0 50px}
+</style>
+</head>
+
+<body><br>
+<br>
+<br>
+<div id="content" style=" float:right; overflow:hidden; background:pink; position:relative;">
+<div id="outer" style="float:right;position:relative; width:550px; background:gray; margin:30px; ">
+    <div id="inner"  style="margin:100px; padding:100px; border:50px black solid; position:relative; background:white">
+        <div id="div1">
+        偏移：它现在和文档有一定的偏移（产生的一段距离）
+             1、它相对于谁产生的偏移(偏移的参照物)
+             2、具体的值（量），比如左边偏移了8px，上边偏移62px
+             3、用JS来表示1和2，分别是offsetParent,offsetLeft和offsetTop
+             4、以上这三个属性都是只读的，无法修改
+             5、
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+var div1=document.getElementById("div1");
+//计算div1到文档的的绝对偏移量
+var l=div1.offsetLeft;
+//当前这一级的offsetParent是inner
+l+=div1.offsetParent.offsetLeft+div1.offsetParent.clientLeft;
+//当前这一级的offseteParent是outer
+l+=div1.offsetParent.offsetParent.offsetLeft;
+//当前这一级的offsetParent是content
+l+=div1.offsetParent.offsetParent.offsetParent.offsetLeft;
+alert(l);
+function offset(ele){//计算ele到文档的的绝对偏移量
+	var l=ele.offsetLeft;
+	var t=ele.offsetTop;
+	var p=ele.offsetParent;
+	
+	while(p){
+		if(window.navigator.userAgent.indexOf("MSIE 8")>-1){
+			l+=p.offsetLeft;
+			t+=p.offsetTop;
+		}else{
+			l+=p.offsetLeft+p.clientLeft;
+			t+=p.offsetTop+p.clientTop;
+		}
+		p=p.offsetParent;	
+		
+	}
+/*	var obj={}
+	obj.left=l;
+	obj.top=t;
+	return obj;*/
+	return {left:l,top:t}
+}
+
+alert(offset(div1).left);
+</script>

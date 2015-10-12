@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+#div1{ width:300px; background:pink; color:purple; height:20px; line-height:20px; font-size:18px;}
+#div1::before{ content:"before" ; color:red; background:green;}
+#div1::after{ content:"after" ; color:white; background:black; width:140px; text-align:center; display:inline-block;}
+</style>
+</head>
+
+<body>
+//伪元素
+<div id="div1">我是一个div</div>
+
+
+</body>
+</html>
+<script>
+var ele=document.getElementById("div1");
+console.log(window.getComputedStyle(ele,"after").width);
+
+</script>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+#div1{  background:red; padding:100px; border:50px green dashed;  margin:90px;}
+body{ font-size:12px;}
+p{ font-size:1em;}
+
+p,ul,li,h1,a{ font-size:12px; margin:0; list-style:none;}
+
+</style>
+</head>
+
+<body>
+<div id="div1">文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字</div>
+<p id="p1">段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落</p>
+</body>
+</html>
+<script>
+//1、盒子模式是什么？
+var oDiv=document.getElementById("div1");
+
+oDiv.clientWidth;//内容+padding
+oDiv.offsetWidth;//clientWidth+border
+//设定的内容的宽和实际的内容的宽  的区别
+
+oDiv.scrollWidth;
+oDiv.scrollHeight;//实际的内容的高度（特别强调的一点是：包括溢出的内容）
+//以上属性，都是只读的属性.
+//在没有溢出的情况下，scrollHeight和clientHeight相同
+
+oDiv.clientLeft;//左边框的宽
+oDiv.clinetTop;//上边框的宽
+
+//获得一个DOM元素所有的CSS属性
+  //getComputedStyle方法，有两参数：1、DOM元素，2、是不是获得这个DOM元素的伪元素（或伪类）的CSS样式。它返回的是这个DOM元素的样式集合（对象）
+  //IE不支持.IE中用一个属性来获得CSS对象：currentStyle
+getComputedStyle(oDiv,null).height
+oDiv.currentStyle.position
+</script>

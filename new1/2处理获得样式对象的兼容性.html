@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+</body>
+</html>
+<script>
+function getCss(ele,attr){//表示获得ele这个元素的attr样式的值
+	if(window.getComputedStyle){
+		return getComputedStyle(ele,null)[attr];
+		/*return getComputedStyle(ele,null).attr;
+		return getComputedStyle(ele,null)["attr"];
+		attr="attr"*/
+		
+	}else{
+		return ele.currentStyle[attr];
+	}	
+}
+
+function getCss(ele,attr){
+	if(typeof getComputedStyle == "function"){
+		return getComputedStyle(ele,null)[attr]	
+	}else{
+		return ele.currentStyle[attr];	
+	}
+}
+function getCss(ele,attr){
+	try{
+		return getComputedStyle(ele,null)[attr]
+	}catch(e){
+		return ele.currentStyle[attr];
+	}
+}
+
+/*window["getComputedStyle"](ele,null)["height"];
+
+window.getComputedStyle(ele,null).height;
+var a=[1,2,3];
+a[0]
+a[1]
+obj={0:"a",1:"b",2:"c"}
+obj[0]*/
+
+
+
+
+</script>

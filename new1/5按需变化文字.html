@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+#content{ height:200px; width:70%; margin:0 auto; background:green; font-size:36px; text-align:center; line-height:200px;}
+
+</style>
+</head>
+
+<body style="height:3400px;"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div id="content">
+	我是原来的文字
+
+</div>
+
+</body>
+</html>
+<script>
+ var content=document.getElementById("content");
+ function offset(ele){//计算ele到文档的的绝对偏移量
+	var l=ele.offsetLeft;
+	var t=ele.offsetTop;
+	var p=ele.offsetParent;
+	
+	while(p){
+		if(window.navigator.userAgent.indexOf("MSIE 8")>-1){
+			l+=p.offsetLeft;
+			t+=p.offsetTop;
+		}else{
+			l+=p.offsetLeft+p.clientLeft;
+			t+=p.offsetTop+p.clientTop;
+		}
+		p=p.offsetParent;	
+		
+	}
+	return {left:l,top:t}
+}
+var t=offset(content).top+content.offsetHeight;
+//如果绿盒子的底边<浏览器的底边，则说明盒子已经到了浏览器的可视区了
+window.onscroll=function(){
+	var browserBottom=(document.documentElement.scrollTop||document.body.scrollTop)+(document.documentElement.clientHeight||document.body.clientHeight)
+	if(t<browserBottom){
+		content.innerHTML="变变变，把我的女朋友变个漂亮的";
+	}
+}
+
+</script>

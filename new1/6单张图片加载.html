@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+加载10个CSS外链文件
+发请求
+2
+3
+4
+5
+加载了10个JS外链文件
+</head>
+
+<body style="height:3500px;">
+100张图片
+下载一张图片：服务器响应，下载需要网络带宽
+一共900张
+需要看的只有10张
+其它的890张只存在个img标签， src这儿用一张占位图片
+一次下载
+10亿
+网页中图片的一些机制
+缓存
+异步
+同时多任务
+烧水  50分钟
+打电话
+充电
+打扫卫生 
+
+按顺序进行的就叫同步：
+加载一个网页的时候发生什么事：
+加载HTML网页本身
+如果是同步则会发生这样的不好体验
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<img width="300" height="300" src="default.gif">
+
+</body>
+</html>
+<script>
+//默认是default.gif
+//当加载的时候是loading.gif
+//当加载完成的时候，把loading换成真成的图片
+var strImg="http://pic1.win4000.com/pic/9/8c/0a08466924.jpg";
+
+function offset(ele){//计算ele到文档的的绝对偏移量
+	var l=ele.offsetLeft;
+	var t=ele.offsetTop;
+	var p=ele.offsetParent;
+	
+	while(p){
+		if(window.navigator.userAgent.indexOf("MSIE 8")>-1){
+			l+=p.offsetLeft;
+			t+=p.offsetTop;
+		}else{
+			l+=p.offsetLeft+p.clientLeft;
+			t+=p.offsetTop+p.clientTop;
+		}
+		p=p.offsetParent;	
+		
+	}
+	return {left:l,top:t}
+}
+var oImg=document.getElementsByTagName("img").item(0);
+var t=offset(oImg).top+oImg.offsetHeight;
+
+window.onscroll=function(){
+	var browserBottom=(document.documentElement.scrollTop||document.body.scrollTop)+(document.documentElement.clientHeight||document.body.clientHeight);
+	if(oImg.loaded)return;
+	if(t<browserBottom){
+		oImg.src="o_loading.gif";
+		
+		//oImg.src=strImg+"?"+Math.random();//创建随机的url查询字符串（querystring）,人为的造出每次都不同的伪地址
+		var strUri=strImg+"?"+Math.random();	
+		//var tempImg=new Image;//创建一个img标签对象
+		var tempImg=document.createElement("img");//这样写和上边完全相同
+		//new HTMLImageElement
+		tempImg.src=strUri;//不必把tempImg添加到文档，只要给它的src属性赋一个真正的资源地址，则tempImg这个图片对象就会自动的去下载这个资源（图片）
+		tempImg.onload=function(){//这个事件的触发，代表着tempImg需要的图片资源已经成功的下载了
+		//oImg.src=strUri;
+		oImg.src=this.src;//这两种写法一样
+		oImg.loaded=true;
+			
+		}
+	}
+}
+
+
+//我们经常去计算一些元素的高或宽，在以下两种情况，你是计算不出来的
+//1、这个元素没有被添加到文档中
+//2、如果这个元素是一个图片元素，当这个元素onload没有触发之前，计算出来的结果是错的
+
+</script>
